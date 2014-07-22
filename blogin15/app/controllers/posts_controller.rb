@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  respond_to :html
+  respond_to :html, :atom
 
   def index
     @posts = Post.order("created_at desc")
