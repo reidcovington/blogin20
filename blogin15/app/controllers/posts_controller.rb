@@ -6,6 +6,11 @@ class PostsController < ApplicationController
     respond_with @posts
   end
 
+  def show
+    @post = Post.find_by_id(params[:id])
+    respond_with @post
+  end
+
   def new
     @post = Post.new
   end
@@ -25,9 +30,14 @@ class PostsController < ApplicationController
   end
 
   def update
-    post = Post.find_by_id(params[:id])
-    post.update_attributes(post_params)
-    redirect_to posts_path
+    @post = Post.find_by_id(params[:id])
+    @post.update_attributes(post_params)
+
+    if @post.save
+      redirect_to posts_path
+    else
+      render "edit"
+    end
   end
 
   def destroy
