@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   def create
     p params
-    @post = Post.create(post_params)
+    post = Post.create(post_params)
     redirect_to posts_path
   end
 
@@ -21,9 +21,15 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find_by_id(params[:id])
-    @post.update_attributes(post_params)
+    post = Post.find_by_id(params[:id])
+    post.update_attributes(post_params)
     redirect_to posts_path
+  end
+
+  def destroy
+    post = Post.find_by_id(params[:id])
+    post.destroy
+    redirect_to posts_path, :notice => "#{post.title} was deleted"
   end
 
   def post_params
