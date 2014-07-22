@@ -1,8 +1,17 @@
 class CommentsController < ApplicationController
+  before_filter do
+    @post = Post.find_by_id(params[:post_id])
+  end
+
   def create
-    post = Post.find_by_id(params[:post_id])
-    post.comments.create(comment_params)
-    redirect_to post
+    @post.comments.create(comment_params)
+    redirect_to @post
+  end
+
+  def destroy
+    comment = Comment.find_by_id(params[:id])
+    comment.destroy
+    redirect_to @post
   end
 
   def comment_params
