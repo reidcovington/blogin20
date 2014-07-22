@@ -12,15 +12,21 @@ class PostsController < ApplicationController
 
   def create
     p params
-    @post = Post.create(user_params)
+    @post = Post.create(post_params)
     redirect_to posts_path
-  end
-
-  def user_params
-    params.require(:post).permit(:title, :body)
   end
 
   def edit
     @post = Post.find_by_id(params[:id])
+  end
+
+  def update
+    @post = Post.find_by_id(params[:id])
+    @post.update_attributes(post_params)
+    redirect_to posts_path
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body)
   end
 end
