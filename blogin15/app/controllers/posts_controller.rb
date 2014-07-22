@@ -7,11 +7,10 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.find_by_id(params[:id])
+    @post = Post.new
   end
 
   def create
-    p params
     post = Post.create(post_params)
     redirect_to posts_path
   end
