@@ -41,6 +41,11 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def show
+    @post = Post.find_by_id(params[:id])
+    respond_with @post
+  end
+
   def post_params
     params.require(:post).permit(:title, :body)
   end
