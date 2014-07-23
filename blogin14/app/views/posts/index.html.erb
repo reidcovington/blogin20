@@ -4,6 +4,8 @@
   <div class='body'>
     <%= post.body %>
     <%= link_to 'edit', edit_post_path(post) %>
+    <%= button_to "Delete", post_path(post), :method => :delete %>
     <hr />
   </div>
 <% end %>
+<%= link_to "New Post", new_post_path %>
