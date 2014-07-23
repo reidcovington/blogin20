@@ -1,2 +1,17 @@
 <%= @post.title %>
 <%= @post.body %>
+
+<% @post.comments.each do |comment| %>
+  <p>By: <%= comment.author %></p>
+  <div>
+    <%= comment.body %>
+  </div>
+<% end %>
+
+<%= form_for [@post, Comment.new] do |form| %>
+  <%= form.text_field :author %>
+  <%= form.text_area :body %>
+  <%= form.submit %>
+<% end %>
+
+
