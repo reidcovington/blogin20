@@ -2,3 +2,17 @@
 <div class='body'>
   <%= @post.body %>
 </div>
+
+<% @post.comments.each do |comment| %>
+  <p>By: <%= comment.author %></p>
+  <div class='body'>
+  <%= comment.body %>
+  <%= button_to "Delete", [@post, comment], :method => :delete %>
+</div>
+<% end %>
+
+<%= form_for [@post, Comment.new] do |form| %>
+  <%= form.text_field :author %>
+  <%= form.text_area :body %>
+  <%= form.submit %>
+<% end %>
