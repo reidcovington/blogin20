@@ -7,9 +7,17 @@ class PostsController < ApplicationController
   end
 
   def new
+    @post = Post.new
   end
 
   def create
+    @post = Post.new(params_post)
+
+    if @post.save
+      redirect_to posts_path
+    else
+      render "new"
+    end
   end
 
   def edit
@@ -22,5 +30,9 @@ class PostsController < ApplicationController
   end
 
   def show
+  end
+
+  def params_post
+    params.require(:post).permit(:title, :body)
   end
 end
